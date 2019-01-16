@@ -1,4 +1,4 @@
-Pipedrive API wrapper.
+Pipedrive API wrapper for Ruby on Rails.
 
 # Installation
 Add this line to your application's Gemfile:
