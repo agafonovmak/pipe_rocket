@@ -114,9 +114,16 @@ For example:
 
 If event happens gem send ActiveSupport::Notification like 'deal_updated' with related object.
 
-### Usage example
+## Handle events
 ```
 #config/initializers/events.rb
+
+ActiveSupport::Notifications.subscribe '[object]_[action]' do |*args|
+  event = ActiveSupport::Notifications::Event.new(*args)
+  [object] = event.payload[:[object]] #PipedriveJetrockets::[object] object
+end
+
+e.g
 
 ActiveSupport::Notifications.subscribe 'deal_updated' do |*args|
   event = ActiveSupport::Notifications::Event.new(*args)
