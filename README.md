@@ -61,24 +61,39 @@ All api methods returns Pipedrive::Entity heir objects. They have attr_accessor 
 ## Get all records
 ```
 Pipedrive.deals.all
+Pipedrive.deal_fields.all
 Pipedrive.notes.all
+Pipedrive.organizations.all
+Pipedrive.organization_fields.all
 Pipedrive.persons.all
+Pipedrive.person_fields.all
+Pipedrive.pipelines.all
 Pipedrive.stages.all
 ```
 
 ## Get record by id
 ```
 Pipedrive.deals.find([id])
+Pipedrive.deal_fields.find([id])
 Pipedrive.notes.find([id])
+Pipedrive.organizations.find([id])
+Pipedrive.organization_fields.find([id])
 Pipedrive.persons.find([id])
+Pipedrive.person_fields.find([id])
+Pipedrive.pipelines.find([id])
 Pipedrive.stages.find([id])
 ```
 
 ## Create record
 ```
 Pipedrive.deals.create([hash])
+Pipedrive.deal_fields.create([hash])
 Pipedrive.notes.create([hash])
+Pipedrive.organizations.create([hash])
+Pipedrive.organization_fields.create([hash])
 Pipedrive.persons.create([hash])
+Pipedrive.person_fields.create([hash])
+Pipedrive.pipelines.create([hash])
 Pipedrive.stages.create([hash])
 ```
 
