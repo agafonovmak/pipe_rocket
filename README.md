@@ -21,18 +21,22 @@ gem install pipedrive_jetrockets
 
 # Setup
 ```
+#config/initializers/pipedrive.rb
+
 ENV['pipedrive_api_token'] = '[YOUR_API_TOKEN]'
+CUSTOM_FIELD_NAMES = {
+  deal: {
+    b6be1824d9...90fea09: 'name'
+  }
+}
 ```
+CUSTOM_FIELD_NAMES - hash, which overrides custom field names from server. If you want to have same names as remote, just assign empty hash({}).
 
 # Usage
 
 ## Pipedrive::Entity heirs
 
 ### Pipedrive::Deal
-#### fields: 
-
-:id, :organisation, :title, :value, :currency, :status, :stage_id, :person, :add_time, :update_time
-
 #### methods:
 
 stage - returns Pipeline::Stage object
@@ -40,30 +44,10 @@ stage - returns Pipeline::Stage object
 display_stage_name - returns deal stage(e.g. Sales:Contact Made)
 
 ### Pipedrive::Note
-#### fields:
-
-:id, :deal_id, :person_id, :org_id, :content, :add_time, :update_time
-
 ### Pipedrive::Organisation
-#### fields:
-
-:id, :name, :owner_id, :address, :cc_email, :add_time, :update_time
-
 ### Pipedrive::Person
-#### fields:
-
-:id, :name, :email, :phone, :open_deals_count, :closed_deals_count, :add_time, :update_time
-
 ### Pipedrive::Pipeline
-#### fields:
-
-:id, :name, :add_time, :update_time
-
 ### Pipeline::Stage
-#### fields:
-
-:id, :name, :pipeline_id, :add_time, :update_time
-
 #### methods:
 
 display_name - returns stage name(e.g. Sales:Contact Made)
@@ -72,8 +56,8 @@ pipeline - returns Pipedrive::Pipeline object
 
 ## Methods
 
-All methods returns Pipedrive::Entity heir objects
-
+All api methods returns Pipedrive::Entity heir objects. They have attr_accessor methods for all fields, returned by API. Custom fields can be accessed by their name(not key) or by name specified in CUSTOM_FIELD_NAMES.
+ 
 ## Get all records
 ```
 Pipedrive.deals.all
@@ -104,59 +88,16 @@ Pipedrive.persons.find_by_email([email])
 ```
 
 # Webhooks
-## Deal Updated
+Gem provides way to receive webhooks from Pipedrive. 
+Endpoint url should looks like this:
 
-On
+    host/[object]/[action]
 
-```
-https://[your_pipedrive].pipedrive.com/settings/webhooks
-```
-push 'Create new webhook'.
+For example:
 
-On this page select following params:
+    host/deal/updated
 
-```
-Event action = updated
-
-Event object = deal
-
-ENDPOINT URL = [application_host]/pipedrive/deal_updated
-```
-
-## Deal Added
-
-
-```
-Event action = added
-
-Event object = deal
-
-ENDPOINT URL = [application_host]/pipedrive/deal_added
-```
-
-## Person Updated
-
-
-```
-Event action = updated
-
-Event object = person
-
-ENDPOINT URL = [application_host]/pipedrive/person_updated
-```
-
-
-## Organisation Updated
-
-
-```
-Event action = updated
-
-Event object = organization
-
-ENDPOINT URL = [application_host]/pipedrive/organisation_updated
-```
-
+If event happens gem send ActiveSupport::Notification like 'deal_updated' with related object.
 
 ### Usage example
 ```
@@ -166,22 +107,9 @@ ActiveSupport::Notifications.subscribe 'deal_updated' do |*args|
   event = ActiveSupport::Notifications::Event.new(*args)
   deal = event.payload[:deal] #PipedriveJetrockets::Deal object
 end
-
-ActiveSupport::Notifications.subscribe 'deal_added' do |*args|
-  event = ActiveSupport::Notifications::Event.new(*args)
-  deal = event.payload[:deal] #PipedriveJetrockets::Deal object
-end
-
-ActiveSupport::Notifications.subscribe 'person_updated' do |*args|
-  event = ActiveSupport::Notifications::Event.new(*args)
-  person = event.payload[:person] #PipedriveJetrockets::Person object
-end
-
-ActiveSupport::Notifications.subscribe 'organisation_updated' do |*args|
-  event = ActiveSupport::Notifications::Event.new(*args)
-  organisation = event.payload[:organisation] #PipedriveJetrockets::Organisation object
-end
 ```
+
+This will work with deal, note, organization, person, pipeline, stage, user objects and all event actions.
 
 # Exceptions
 If there is no connection or Pipedrive API returns error code, gem raises PipedriveJetrockets::Error. Error object has field *code* which contains HTTP error code(e.g. 400, 404, 408)
