@@ -106,11 +106,11 @@ Pipedrive.persons.find_by_email([email])
 Gem provides way to receive webhooks from Pipedrive. 
 Endpoint url should looks like this:
 
-    host/[object]/[action]
+    host/pipedrive/[object]/[action]
 
 For example:
 
-    host/deal/updated
+    host/pipedrive/deal/updated
 
 If event happens gem send ActiveSupport::Notification like 'deal_updated' with related object.
 
