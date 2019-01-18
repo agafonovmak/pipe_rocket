@@ -3,7 +3,7 @@ Pipedrive API wrapper for Ruby on Rails.
 # Installation
 Add this line to your application's Gemfile:
 
-```
+``` Ruby
 gem 'pipedrive_jetrockets'
 ```
 
@@ -20,7 +20,7 @@ gem install pipedrive_jetrockets
 ```
 
 # Setup
-```
+``` Ruby
 #config/initializers/pipedrive.rb
 
 ENV['pipedrive_api_token'] = '[YOUR_API_TOKEN]'
@@ -59,7 +59,7 @@ pipeline - returns Pipedrive::Pipeline object
 All api methods returns Pipedrive::Entity heir objects. They have attr_accessor methods for all fields, returned by API. Custom fields can be accessed by their name(not key) or by name specified in CUSTOM_FIELD_NAMES.
  
 ## Get all records
-```
+``` Ruby
 Pipedrive.deals.all
 Pipedrive.deal_fields.all
 Pipedrive.notes.all
@@ -72,7 +72,7 @@ Pipedrive.stages.all
 ```
 
 ## Get record by id
-```
+``` Ruby
 Pipedrive.deals.find([id])
 Pipedrive.deal_fields.find([id])
 Pipedrive.notes.find([id])
@@ -85,7 +85,7 @@ Pipedrive.stages.find([id])
 ```
 
 ## Create record
-```
+``` Ruby
 Pipedrive.deals.create([hash])
 Pipedrive.deal_fields.create([hash])
 Pipedrive.notes.create([hash])
@@ -98,7 +98,7 @@ Pipedrive.stages.create([hash])
 ```
 
 ## Get persons by email
-```
+``` Ruby
 Pipedrive.persons.find_by_email([email])
 ```
 
@@ -115,7 +115,7 @@ For example:
 If event happens gem send ActiveSupport::Notification like 'deal_updated' with related object.
 
 ## Handle events
-```
+``` Ruby
 #config/initializers/events.rb
 
 ActiveSupport::Notifications.subscribe '[object]_[action]' do |*args|
@@ -143,5 +143,4 @@ Sponsored by [JetRockets](http://www.jetrockets.pro/).
 ![enter image description here](https://camo.githubusercontent.com/034460a54d8671d0d7e5743540613d26e27f16b7/687474703a2f2f6a6574726f636b6574732e70726f2f6a6574726f636b6574732d77686974652e706e67)
 
 # License
-
 Please see [LICENSE](https://github.com/agafonovmak/pipedrive_jetrockets/blob/master/LICENSE) for licensing details.
