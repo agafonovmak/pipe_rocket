@@ -1,12 +1,12 @@
 require 'net/http'
-require 'piperocket/entity'
-require 'piperocket/field'
+require 'pipe_rocket/entity'
+require 'pipe_rocket/field'
 unless ENV["RAILS_ENV"] == 'test'
-  require 'piperocket/engine'
+  require 'pipe_rocket/engine'
 end
-require 'piperocket/service'
-require 'piperocket/person_service'
-require 'piperocket/field_service'
+require 'pipe_rocket/service'
+require 'pipe_rocket/person_service'
+require 'pipe_rocket/field_service'
 
 class Pipedrive
 

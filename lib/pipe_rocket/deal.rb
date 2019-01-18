@@ -1,5 +1,5 @@
-require 'piperocket/organization'
-require 'piperocket/person'
+require 'pipe_rocket/organization'
+require 'pipe_rocket/person'
 
 module PipeRocket
   class Deal < Entity

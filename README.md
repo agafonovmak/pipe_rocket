@@ -143,4 +143,4 @@ Sponsored by [JetRockets](http://www.jetrockets.pro/).
 ![enter image description here](https://camo.githubusercontent.com/034460a54d8671d0d7e5743540613d26e27f16b7/687474703a2f2f6a6574726f636b6574732e70726f2f6a6574726f636b6574732d77686974652e706e67)
 
 # License
-Please see [LICENSE](https://github.com/agafonovmak/piperocket/blob/master/LICENSE) for licensing details.
+Please see [LICENSE](https://github.com/agafonovmak/pipe_rocket/blob/master/LICENSE) for licensing details.
