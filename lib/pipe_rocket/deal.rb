@@ -4,30 +4,39 @@ require 'pipe_rocket/person'
 module PipeRocket
   class Deal < Entity
     attr_accessor :organization, :person
+    def self.key_field_hash
+      @@key_field_hash ||= Pipedrive.deal_fields.key_field_hash
+    end
+
     def initialize(hash)
-      @@key_name_hash ||= Pipedrive.deal_fields.key_field_hash
-      super(hash.except(*@@key_name_hash.keys))
+      super(hash.except(*Deal.key_field_hash.keys))
 
       org_id = hash['org_id']
       person_id = hash['person_id']
 
-      assign_custom_fields(@@key_name_hash, hash)
+      assign_custom_fields(Deal.key_field_hash, hash)
 
       if org_id
-        if org_id.kind_of? Integer
-          @organization = Pipedrive.organizations.find(org_id)
-        else
-          @organization = Organization.new(org_id)
-        end
+        @organization = case org_id
+          when Integer
+            Pipedrive.organizations.find(org_id)
+          when Hash
+            Organization.new(org_id)
+          else
+            nil
+          end
       end
 
       if person_id
-        if person_id.kind_of? Integer
-          @person = Pipedrive.persons.find(person_id)
-        else
-          @person = Person.new(person_id)
+        @person = case person_id
+          when Integer
+            Pipedrive.persons.find(person_id)
+          when Hash
+            Person.new(person_id)
+          else
+            nil
+          end
         end
-      end
     end
 
     def stage

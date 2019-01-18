@@ -10,12 +10,11 @@ module PipeRocket
     end
 
     def assign_custom_fields(key_name_hash, entity_hash)
-      key_name_hash.each do |key, field|
+      names = key_name_hash.map do |key, field|
         name = field.name
         name = name.underscore.gsub(' ','_')
         name = name.gsub('%','percent').gsub(/[^a-zA-Z0-9_]/,'')
         name = transform_field_name(key, name)
-        #Field name starts with symbol or _
         if field.field_type == 'enum'
           option_id = entity_hash[key]
           res_field = field.dup
@@ -24,8 +23,9 @@ module PipeRocket
         else
           instance_variable_set("@#{name}", entity_hash[key])
         end
-        self.class.class_eval {attr_accessor name}
+        name
       end
+      self.class.class_eval {attr_accessor *names}
     end
 
     def transform_field_name(key, name)

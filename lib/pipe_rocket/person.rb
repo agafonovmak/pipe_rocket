@@ -1,24 +1,30 @@
 module PipeRocket
   class Person < Entity
     attr_accessor :email, :phone, :organization, :id
+
+    def self.key_field_hash
+      @@key_field_hash ||= Pipedrive.person_fields.key_field_hash
+    end
+
     def initialize(hash)
-      @@key_name_hash ||= Pipedrive.person_fields.key_field_hash
-      super(hash.except(*@@key_name_hash.keys))
+      super(hash.except(*Person.key_field_hash.keys))
       @email = hash['email'].first['value'] if hash['email']
       @phone = hash['phone'].first['value'] if hash['phone']
+      @id = hash['value'] if hash['value'].present?
+
+      assign_custom_fields(Person.key_field_hash, hash)
 
       org_id = hash['org_id']
       if org_id
-        if org_id.kind_of? Integer
-          @organization = Pipedrive.organizations.find(org_id)
-        else
-          @organization = Organization.new(org_id)
+        @organization = case org_id
+          when Integer
+            Pipedrive.organizations.find(org_id)
+          when Hash
+            Organization.new(org_id)
+          else
+            nil
         end
       end
-
-      @id = hash['value'] if hash['value'].present?
-
-      assign_custom_fields(@@key_name_hash, hash)
-    end
+    end      
   end
 end
