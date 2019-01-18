@@ -4,7 +4,7 @@ Pipedrive API wrapper for Ruby on Rails.
 Add this line to your application's Gemfile:
 
 ``` Ruby
-gem 'piperocket'
+gem 'pipe_rocket'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ bundle
 Or install it yourself as:
 
 ```
-gem install piperocket
+gem install pipe_rocket
 ```
 
 # Setup
@@ -56,45 +56,38 @@ pipeline - returns Pipedrive::Pipeline object
 
 ## Methods
 
-All api methods returns Pipedrive::Entity heir objects. They have attr_accessor methods for all fields, returned by API. Custom fields can be accessed by their name(not key) or by name specified in CUSTOM_FIELD_NAMES.
+All api methods returns Pipedrive::Entity heir objects. They have attr_accessor methods for all fields, returned by API. Custom fields can be accessed by their name(not key) or by name specified in CUSTOM_FIELD_NAMES. 
+
+Via Pipedrive class you can work with the following models: 
+ - deals
+ - deal_fields
+ - notes
+ - organizations
+ - organization_fields
+ - persons
+ - person_fields
+ - pipelines
+ - stages
+
  
 ## Get all records
 ``` Ruby
 Pipedrive.deals.all
-Pipedrive.deal_fields.all
-Pipedrive.notes.all
-Pipedrive.organizations.all
-Pipedrive.organization_fields.all
-Pipedrive.persons.all
-Pipedrive.person_fields.all
-Pipedrive.pipelines.all
-Pipedrive.stages.all
 ```
 
 ## Get record by id
 ``` Ruby
 Pipedrive.deals.find([id])
-Pipedrive.deal_fields.find([id])
-Pipedrive.notes.find([id])
-Pipedrive.organizations.find([id])
-Pipedrive.organization_fields.find([id])
-Pipedrive.persons.find([id])
-Pipedrive.person_fields.find([id])
-Pipedrive.pipelines.find([id])
-Pipedrive.stages.find([id])
 ```
 
 ## Create record
 ``` Ruby
 Pipedrive.deals.create([hash])
-Pipedrive.deal_fields.create([hash])
-Pipedrive.notes.create([hash])
-Pipedrive.organizations.create([hash])
-Pipedrive.organization_fields.create([hash])
-Pipedrive.persons.create([hash])
-Pipedrive.person_fields.create([hash])
-Pipedrive.pipelines.create([hash])
-Pipedrive.stages.create([hash])
+```
+
+## Update record
+``` Ruby
+Pipedrive.deals.update([hash])
 ```
 
 ## Get persons by email
