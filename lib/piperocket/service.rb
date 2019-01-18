@@ -1,17 +1,17 @@
 require 'http'
-require 'pipedrive_jetrockets/deal'
-require 'pipedrive_jetrockets/deal_field'
-require 'pipedrive_jetrockets/note'
-require 'pipedrive_jetrockets/organization'
-require 'pipedrive_jetrockets/organization_field'
-require 'pipedrive_jetrockets/person'
-require 'pipedrive_jetrockets/person_field'
-require 'pipedrive_jetrockets/pipeline'
-require 'pipedrive_jetrockets/stage'
-require 'pipedrive_jetrockets/user'
-require 'pipedrive_jetrockets/error'
+require 'piperocket/deal'
+require 'piperocket/deal_field'
+require 'piperocket/note'
+require 'piperocket/organization'
+require 'piperocket/organization_field'
+require 'piperocket/person'
+require 'piperocket/person_field'
+require 'piperocket/pipeline'
+require 'piperocket/stage'
+require 'piperocket/user'
+require 'piperocket/error'
 
-module PipedriveJetrockets
+module PipeRocket
   class Service
     HOST = 'https://api.pipedrive.com/v1'
     RESOURCES_WITH_CUSTOM_FIELDS = %w(deal organization person)
@@ -22,7 +22,7 @@ module PipedriveJetrockets
     end
 
     def build_entity(raw)
-      "PipedriveJetrockets::#{@resource_name.titleize.delete(' ')}".constantize.new(raw)
+      "PipeRocket::#{@resource_name.titleize.delete(' ')}".constantize.new(raw)
     end
 
     def build_uri(params = {}, specificator = nil)
@@ -41,10 +41,10 @@ module PipedriveJetrockets
         json_array = ::JSON.parse(response)['data']
         json_array.map{|raw|build_entity(raw)}
       else
-        raise PipedriveJetrockets::Error.new(response.code)
+        raise PipeRocket::Error.new(response.code)
       end
     rescue HTTP::ConnectionError
-      raise PipedriveJetrockets::Error.new(408)
+      raise PipeRocket::Error.new(408)
     end
 
     def create(params)
@@ -55,10 +55,10 @@ module PipedriveJetrockets
       when 201
         build_entity(JSON.parse(response.body)['data'])
       else
-        raise PipedriveJetrockets::Error.new(response.code)
+        raise PipeRocket::Error.new(response.code)
       end
     rescue HTTP::ConnectionError
-      raise PipedriveJetrockets::Error.new(408)
+      raise PipeRocket::Error.new(408)
     end
 
     def find(id)
@@ -70,10 +70,10 @@ module PipedriveJetrockets
         raw = ::JSON.parse(response)['data']
         build_entity(raw)
       else
-        raise PipedriveJetrockets::Error.new(response.code)
+        raise PipeRocket::Error.new(response.code)
       end
     rescue HTTP::ConnectionError
-      raise PipedriveJetrockets::Error.new(408)
+      raise PipeRocket::Error.new(408)
     end
 
     def first
@@ -88,10 +88,10 @@ module PipedriveJetrockets
       when 200
         build_entity(JSON.parse(response.body)['data'])
       else
-        raise PipedriveJetrockets::Error.new(response.code)
+        raise PipeRocket::Error.new(response.code)
       end
     rescue HTTP::ConnectionError
-      raise PipedriveJetrockets::Error.new(408)
+      raise PipeRocket::Error.new(408)
     end
 
     protected

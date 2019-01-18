@@ -1,4 +1,4 @@
-module PipedriveJetrockets
+module PipeRocket
   class Entity
     def initialize(hash)
       hash.each do |k,v|

@@ -1,4 +1,4 @@
-module PipedriveJetrockets
+module PipeRocket
   class Person < Entity
     attr_accessor :email, :phone, :organization, :id
     def initialize(hash)

@@ -1,4 +1,4 @@
-module PipedriveJetrockets
+module PipeRocket
   class OrganizationField < Field
   end
 end

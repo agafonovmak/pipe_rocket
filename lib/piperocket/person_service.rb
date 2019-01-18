@@ -1,4 +1,4 @@
-module PipedriveJetrockets
+module PipeRocket
   class PersonService < Service
     HOST = 'https://api.pipedrive.com/v1'
 
@@ -16,10 +16,10 @@ module PipedriveJetrockets
         return [] unless json_array
         json_array.map{|raw|build_entity(raw)}
       else
-        raise PipedriveJetrockets::Error.new(response.code)
+        raise PipeRocket::Error.new(response.code)
       end
     rescue HTTP::ConnectionError
-      raise PipedriveJetrockets::Error.new(408)
+      raise PipeRocket::Error.new(408)
     end
 
   end

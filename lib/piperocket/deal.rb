@@ -1,7 +1,7 @@
-require 'pipedrive_jetrockets/organization'
-require 'pipedrive_jetrockets/person'
+require 'piperocket/organization'
+require 'piperocket/person'
 
-module PipedriveJetrockets
+module PipeRocket
   class Deal < Entity
     attr_accessor :organization, :person
     def initialize(hash)

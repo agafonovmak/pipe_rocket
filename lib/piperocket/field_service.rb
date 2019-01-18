@@ -1,4 +1,4 @@
-module PipedriveJetrockets
+module PipeRocket
   class FieldService < Service
     HOST = 'https://api.pipedrive.com/v1'
 

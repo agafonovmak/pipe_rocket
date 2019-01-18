@@ -1,4 +1,4 @@
-module PipedriveJetrockets
+module PipeRocket
   class Field < Entity
     attr_accessor :is_subfield, :option_id
     def initialize(hash)

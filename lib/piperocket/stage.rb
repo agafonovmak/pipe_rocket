@@ -1,4 +1,4 @@
-module PipedriveJetrockets
+module PipeRocket
   class Stage < Entity
     def pipeline
       Pipedrive.pipelines.find(self.pipeline_id)

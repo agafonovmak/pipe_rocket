@@ -4,7 +4,7 @@ Pipedrive API wrapper for Ruby on Rails.
 Add this line to your application's Gemfile:
 
 ``` Ruby
-gem 'pipedrive_jetrockets'
+gem 'piperocket'
 ```
 
 And then execute:
@@ -16,7 +16,7 @@ bundle
 Or install it yourself as:
 
 ```
-gem install pipedrive_jetrockets
+gem install piperocket
 ```
 
 # Setup
@@ -120,21 +120,21 @@ If event happens gem send ActiveSupport::Notification like 'deal_updated' with r
 
 ActiveSupport::Notifications.subscribe '[object]_[action]' do |*args|
   event = ActiveSupport::Notifications::Event.new(*args)
-  [object] = event.payload[:[object]] #PipedriveJetrockets::[object] object
+  [object] = event.payload[:[object]] #PipeRocket::[object] object
 end
 
 e.g
 
 ActiveSupport::Notifications.subscribe 'deal_updated' do |*args|
   event = ActiveSupport::Notifications::Event.new(*args)
-  deal = event.payload[:deal] #PipedriveJetrockets::Deal object
+  deal = event.payload[:deal] #PipeRocket::Deal object
 end
 ```
 
 This will work with deal, note, organization, person, pipeline, stage, user objects and all event actions.
 
 # Exceptions
-If there is no connection or Pipedrive API returns error code, gem raises PipedriveJetrockets::Error. Error object has field *code* which contains HTTP error code(e.g. 400, 404, 408)
+If there is no connection or Pipedrive API returns error code, gem raises PipeRocket::Error. Error object has field *code* which contains HTTP error code(e.g. 400, 404, 408)
 
 
 # Credits
@@ -143,4 +143,4 @@ Sponsored by [JetRockets](http://www.jetrockets.pro/).
 ![enter image description here](https://camo.githubusercontent.com/034460a54d8671d0d7e5743540613d26e27f16b7/687474703a2f2f6a6574726f636b6574732e70726f2f6a6574726f636b6574732d77686974652e706e67)
 
 # License
-Please see [LICENSE](https://github.com/agafonovmak/pipedrive_jetrockets/blob/master/LICENSE) for licensing details.
+Please see [LICENSE](https://github.com/agafonovmak/piperocket/blob/master/LICENSE) for licensing details.

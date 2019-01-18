@@ -1,4 +1,4 @@
-module PipedriveJetrockets
+module PipeRocket
   class Organization < Entity
     def initialize(hash)
       @@key_name_hash ||= Pipedrive.organization_fields.key_field_hash

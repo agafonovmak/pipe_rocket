@@ -1,15 +1,15 @@
 require 'rake'
 Gem::Specification.new do |s|
   s.add_dependency "http"
-  s.name        = 'pipedrive_jetrockets'
-  s.version     = '0.0.77'
-  s.date        = '2018-12-15'
+  s.name        = 'piperocket'
+  s.version     = '0.1'
+  s.date        = '2019-01-18'
   s.summary     = "Pipedrive API wrapper"
   s.description = "Pipedrive API wrapper"
   s.authors     = ["Agafonov Maksim"]
   s.require_paths = ['lib']
   s.email       = 'agafonov.maksim@jetrockets.ru'
-  s.files       = FileList["app/*", "config/*", "lib/*", "lib/pipedrive_jetrockets/*", "app/controllers/pipedrive_jetrockets/*"]
-  s.homepage    = 'http://rubygems.org/gems/hola'
+  s.files       = FileList["app/*", "config/*", "lib/*", "lib/piperocket/*", "app/controllers/piperocket/*"]
+  s.homepage    = 'https://github.com/agafonovmak/PipeRocket'
   s.license      = 'MIT'
 end

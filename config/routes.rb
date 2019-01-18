@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
   scope '/pipedrive' do
-    post '/:object/:action' => 'pipedrive_jetrockets/events#handle'
+    post '/:object/:action' => 'piperocket/events#handle'
   end
 end
