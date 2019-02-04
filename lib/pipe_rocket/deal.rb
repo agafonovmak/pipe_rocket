@@ -4,6 +4,8 @@ require 'pipe_rocket/person'
 module PipeRocket
   class Deal < Entity
     attr_accessor :organization, :person
+
+    # Returns hash {custom_field_key: PipeRocket::Field object}
     def self.key_field_hash
       @@key_field_hash ||= Pipedrive.deal_fields.key_field_hash
     end
@@ -39,10 +41,12 @@ module PipeRocket
         end
     end
 
+    # Returns PipeRocket::Stage object corresponding to current deal stage
     def stage
       Pipedrive.stages.find(self.stage_id)
     end
 
+    # Returns stage name like PipelineName:StageName
     def display_stage_name
       self.stage.display_name
     end

@@ -9,6 +9,7 @@ module PipeRocket
       end
     end
 
+    # Assign custom fields, using their names but not keys
     def assign_custom_fields(key_name_hash, entity_hash)
       names = key_name_hash.map do |key, field|
         name = field.name
@@ -28,6 +29,7 @@ module PipeRocket
       self.class.class_eval {attr_accessor *names}
     end
 
+    # Override custom field name if it present in CUSTOM_FIELD_NAMES
     def transform_field_name(key, name)
       hash = ::CUSTOM_FIELD_NAMES
       class_name = self.class.name.demodulize.underscore.to_sym

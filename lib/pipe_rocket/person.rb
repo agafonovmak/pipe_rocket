@@ -2,6 +2,7 @@ module PipeRocket
   class Person < Entity
     attr_accessor :email, :phone, :organization, :id
 
+    # Returns hash {custom_field_key: PipeRocket::Field object}
     def self.key_field_hash
       @@key_field_hash ||= Pipedrive.person_fields.key_field_hash
     end
@@ -25,6 +26,6 @@ module PipeRocket
             nil
         end
       end
-    end      
+    end
   end
 end

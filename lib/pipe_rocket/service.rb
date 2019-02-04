@@ -21,10 +21,12 @@ module PipeRocket
       @has_custom_fields = RESOURCES_WITH_CUSTOM_FIELDS.include?(@resource_name)
     end
 
+    # Build resource_name class object from hash
     def build_entity(raw)
       "PipeRocket::#{@resource_name.titleize.delete(' ')}".constantize.new(raw)
     end
 
+    # Build uri for request
     def build_uri(params = {}, specificator = nil)
       params.merge!(api_token: ENV['pipedrive_api_token'])
       query_string = params.map{|k,v|"#{k}=#{v}"}.join('&')
@@ -32,6 +34,7 @@ module PipeRocket
       uri = URI("#{HOST}/#{plural_resource_name}/#{specificator}?#{query_string}")
     end
 
+    # Getting all @resource_name object from Pipedrive
     def all
       uri = build_uri
       response = HTTP.get(uri)
@@ -47,6 +50,7 @@ module PipeRocket
       raise PipeRocket::Error.new(408)
     end
 
+    # Create @resource_name in Pipedrive
     def create(params)
       uri = build_uri
       response = HTTP.post(uri, form: transform_custom_fields(params))
@@ -61,6 +65,7 @@ module PipeRocket
       raise PipeRocket::Error.new(408)
     end
 
+    # Find @resource_name object by id
     def find(id)
       uri = build_uri({}, id)
       response = HTTP.get(uri)
@@ -76,10 +81,12 @@ module PipeRocket
       raise PipeRocket::Error.new(408)
     end
 
+    # Getting first @resource_name object
     def first
       self.all.first
     end
 
+    # Update @resource_name object by id
     def update(id, params)
       uri = build_uri({}, id)
       response = HTTP.put(uri, form: transform_custom_fields(params))
@@ -96,6 +103,7 @@ module PipeRocket
 
     protected
 
+    # Trasform custom fields from their names to keys
     def transform_custom_fields(params)
       return params unless @has_custom_fields
 
@@ -120,13 +128,7 @@ module PipeRocket
       res
     end
 
-    def transform_field_name(key, name)
-      hash = ::CUSTOM_FIELD_NAMES
-      class_name = @resource_name
-      return name if hash.nil? || hash[class_name].nil? || hash[class_name].key(key.to_sym).nil?
-      hash[class_name][key.to_sym]
-    end
-
+    # Clear string from forbidden symbols for ruby variables
     def clear_key(key)
       key = key.underscore.gsub(' ','_')
       key = key.gsub('%','percent').gsub(/[^a-zA-Z0-9_]/,'')

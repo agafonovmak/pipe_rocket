@@ -6,6 +6,7 @@ module PipeRocket
       @resource_name = resource_name
     end
 
+    # Find person by email
     def find_by_email(email)
       uri = build_uri({term: email, search_by_email: true }, 'find')
       response = HTTP.get(uri)

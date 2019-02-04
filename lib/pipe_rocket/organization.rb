@@ -1,5 +1,8 @@
 module PipeRocket
   class Organization < Entity
+    attr_accessor :id
+    
+    # Returns hash {custom_field_key: PipeRocket::Field object}
     def self.key_field_hash
       @@key_field_hash ||= Pipedrive.organization_fields.key_field_hash
     end
