@@ -5,19 +5,26 @@ unless ENV["RAILS_ENV"] == 'test'
   require 'pipe_rocket/engine'
 end
 require 'pipe_rocket/service'
+require 'pipe_rocket/deal_service'
 require 'pipe_rocket/person_service'
 require 'pipe_rocket/field_service'
+require 'pipe_rocket/file_service'
 
 class Pipedrive
 
-  # Getting deal service object(PipeRocket::Servcice)
+  # Getting deal \deal_service object(PipeRocket::Servcice)
   def self.deals
-    @@deals_service ||= PipeRocket::Service.new('deal')
+    @@deals_service ||= PipeRocket::DealService.new('deal')
   end
 
   # Getting \deal_fields service object(PipeRocket::FieldServcice)
   def self.deal_fields
     @@deal_fields_service ||= PipeRocket::FieldService.new('dealField')
+  end
+
+  # Getting \files service object(PipeRocket::FileService)
+  def self.files
+    @@files_service ||= PipeRocket::FileService.new('file')
   end
 
   # Getting note service object(PipeRocket::Servcice)

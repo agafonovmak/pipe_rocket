@@ -1,6 +1,7 @@
 require 'http'
 require 'pipe_rocket/deal'
 require 'pipe_rocket/deal_field'
+require 'pipe_rocket/file'
 require 'pipe_rocket/note'
 require 'pipe_rocket/organization'
 require 'pipe_rocket/organization_field'
@@ -22,16 +23,17 @@ module PipeRocket
     end
 
     # Build resource_name class object from hash
-    def build_entity(raw)
-      "PipeRocket::#{@resource_name.titleize.delete(' ')}".constantize.new(raw)
+    def build_entity(raw, resource_name = nil)
+      resource_name ||= @resource_name
+      "PipeRocket::#{resource_name.titleize.delete(' ')}".constantize.new(raw)
     end
 
     # Build uri for request
-    def build_uri(params = {}, specificator = nil)
+    def build_uri(params = {}, specificator = nil, action = nil)
       params.merge!(api_token: ENV['pipedrive_api_token'])
       query_string = params.map{|k,v|"#{k}=#{v}"}.join('&')
       plural_resource_name = @resource_name == 'person' ? 'persons' : @resource_name.pluralize
-      uri = URI("#{HOST}/#{plural_resource_name}/#{specificator}?#{query_string}")
+      uri = URI("#{HOST}/#{plural_resource_name}/#{specificator}/#{action}?#{query_string}")
     end
 
     # Getting all @resource_name object from Pipedrive

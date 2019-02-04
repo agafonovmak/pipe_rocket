@@ -50,5 +50,9 @@ module PipeRocket
     def display_stage_name
       self.stage.display_name
     end
+
+    def files
+      Pipedrive.deals.deal_files(self.id)
+    end
   end
 end
