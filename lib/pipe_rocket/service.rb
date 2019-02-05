@@ -33,7 +33,7 @@ module PipeRocket
       params.merge!(api_token: ENV['pipedrive_api_token'])
       query_string = params.map{|k,v|"#{k}=#{v}"}.join('&')
       plural_resource_name = @resource_name == 'person' ? 'persons' : @resource_name.pluralize
-      uri = URI("#{HOST}/#{plural_resource_name}/#{specificator}/#{action}?#{query_string}")
+      uri = URI("#{HOST}/#{[plural_resource_name, specificator, action].compact.join('/')}?#{query_string}")
     end
 
     # Getting all @resource_name object from Pipedrive

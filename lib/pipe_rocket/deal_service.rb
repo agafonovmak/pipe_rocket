@@ -13,6 +13,7 @@ module PipeRocket
       case response.code
       when 200
         json_array = ::JSON.parse(response)['data']
+        return [] unless json_array
         json_array.map{|raw|build_entity(raw, 'file')}
       else
         raise PipeRocket::Error.new(response.code)
