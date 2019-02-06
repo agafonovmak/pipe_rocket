@@ -39,7 +39,7 @@ CUSTOM_FIELD_NAMES - hash, which overrides custom field names from server. If yo
 ### Pipedrive::Deal
 #### methods:
 
-files - returns File object, attached to deal, including files from email messages. File object has S3 url with which you can directly download file from Amazon.
+files - returns File objects, attached to deal, including files from email messages. File object has S3 url by which you can directly download file from Amazon.
 
 stage - returns Pipeline::Stage object
 
