@@ -52,7 +52,10 @@ module PipeRocket
     end
 
     def files
-      Pipedrive.deals.deal_files(self.id)
+      mail_files = Pipedrive.deals.deal_mail_messages(self.id).inject([]) do |res, message|
+        res + message.files
+      end
+      Pipedrive.deals.deal_files(self.id) + mail_files
     end
   end
 end

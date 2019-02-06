@@ -2,7 +2,7 @@ require 'rake'
 Gem::Specification.new do |s|
   s.add_dependency "http"
   s.name        = 'pipe_rocket'
-  s.version     = '0.0.7'
+  s.version     = '0.0.9'
   s.date        = '2019-01-18'
   s.summary     = "Pipedrive API wrapper"
   s.description = "Pipedrive API wrapper"
