@@ -33,25 +33,24 @@ CUSTOM_FIELD_NAMES = {
 CUSTOM_FIELD_NAMES - hash, which overrides custom field names from server. If you want to have same names as remote, just assign empty hash({}).
 
 # Usage
+## PipeRocket::Deal
+```ruby
+deal = Pipedrive.deals.find([id]) #PipeRocket::Deal object
 
-## Pipedrive::Entity heirs
+deal.files #File objects, attached to deal, including files from email messages.
+deal.files.first.url #File object has S3 url by which you can directly download file from Amazon.
 
-### Pipedrive::Deal
-#### methods:
+deal.stage #returns Pipeline::Stage object
+deal.display_stage_name #returns deal stage(e.g. Sales:Contact Made)
+```
+## Pipeline::Stage
+```ruby
+stage = Pipedrive.stages.find([id]) #PipeRocket::Stage object
 
-files - returns File objects, attached to deal, including files from email messages. File object has S3 url by which you can directly download file from Amazon.
+stage.display_name #stage name(e.g. Sales:Contact Made)
 
-stage - returns Pipeline::Stage object
-
-display_stage_name - returns deal stage(e.g. Sales:Contact Made)
-
-### Pipeline::Stage
-#### methods:
-
-display_name - returns stage name(e.g. Sales:Contact Made)
-
-pipeline - returns Pipedrive::Pipeline object
-
+stage.pipeline #Pipedrive::Pipeline object
+```
 ## Methods
 
 All api methods returns Pipedrive::Entity heir objects. They have attr_accessor methods for all fields, returned by API. Custom fields can be accessed by their name(not key) or by name specified in CUSTOM_FIELD_NAMES. 
