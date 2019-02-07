@@ -38,18 +38,18 @@ CUSTOM_FIELD_NAMES - hash, which overrides custom field names from server. If yo
 deal = Pipedrive.deals.find([id]) #PipeRocket::Deal object
 
 deal.files #File objects, attached to deal, including files from email messages.
-deal.files.first.url #File object has S3 url by which you can directly download file from Amazon.
+deal.files.first.url #S3 url by which you can directly download file from Amazon.
 
-deal.stage #returns Pipeline::Stage object
-deal.display_stage_name #returns deal stage(e.g. Sales:Contact Made)
+deal.stage #Pipeline::Stage object
+deal.display_stage_name #deal stage (e.g. Sales:Contact Made)
 ```
-## Pipeline::Stage
+## PipeRocket::Stage
 ```ruby
 stage = Pipedrive.stages.find([id]) #PipeRocket::Stage object
 
 stage.display_name #stage name(e.g. Sales:Contact Made)
 
-stage.pipeline #Pipedrive::Pipeline object
+stage.pipeline #PipeRocket::Pipeline object
 ```
 ## Methods
 
