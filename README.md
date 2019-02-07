@@ -40,7 +40,7 @@ deal = Pipedrive.deals.find([id]) #PipeRocket::Deal object
 deal.files #File objects, attached to deal, including files from email messages.
 deal.files.first.url #S3 url by which you can directly download file from Amazon.
 
-deal.stage #Pipeline::Stage object
+deal.stage #PipeRocket::Stage object
 deal.display_stage_name #deal stage (e.g. Sales:Contact Made)
 ```
 ## PipeRocket::Stage
@@ -53,7 +53,7 @@ stage.pipeline #PipeRocket::Pipeline object
 ```
 ## Methods
 
-All api methods returns Pipedrive::Entity heir objects. They have attr_accessor methods for all fields, returned by API. Custom fields can be accessed by their name(not key) or by name specified in CUSTOM_FIELD_NAMES. 
+All api methods returns PipeRocket::Entity heir objects. They have attr_accessor methods for all fields, returned by API. Custom fields can be accessed by their name(not key) or by name specified in CUSTOM_FIELD_NAMES. 
 
 Via Pipedrive class you can work with the following models: 
  - deals
